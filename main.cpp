@@ -21,6 +21,35 @@ void generateUniqueRandomString(char s[]) {
     s[5] = '\0';
 }
 
+bool InAlphabet(char c) {
+    bool flag = false;
+    string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    for (int i = 0; i < 26; ++i) {
+        if (c == alphabet[i]) flag = true;
+    }
+    return flag;
+}
+
+string StringCheck() {
+    char str[N_MAX + 1];
+    int k;
+    bool flag = true;
+
+    while(flag) {
+        k = 0;
+        cin >> str;
+        for (int i = 0; i < strlen(str); i++) {
+            if (!InAlphabet(str[i])) {
+                k += 1;
+                break;
+            }
+        }
+        if (k == 0) flag = false;
+        else cout << "Input is incorrect! Try again!\n";
+    }
+    return str;
+}
+
 int main() {
     srand(time(0));
     char A[N_MAX + 1];
@@ -43,14 +72,15 @@ int main() {
     } while (flag == 0);
 
     if (strcmp(key, "M") == 0 || strcmp(key, "m") == 0) {
+        cout << "Enter your sets using capital letters.\n";
         cout << "A:\n";
-        cin >> A;
+        strcpy(A, StringCheck().c_str());
         cout << "B:\n";
-        cin >> B;
+        strcpy(B, StringCheck().c_str());
         cout << "C:\n";
-        cin >> C;
+        strcpy(C, StringCheck().c_str());
         cout << "D:\n";
-        cin >> D;
+        strcpy(D, StringCheck().c_str());
     } else {
         generateUniqueRandomString(A);
         generateUniqueRandomString(B);
